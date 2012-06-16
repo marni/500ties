@@ -1,28 +1,49 @@
 extends base
 
 block content_header
+  #fb-root
+  script
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+            fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
 
 block content
-    .row 
-        .span10.offset2
-            .suscribe
+  .row 
+    .span10.offset2
+      .suscribe
                 
-                .row
-                    .span3
-                        img(src='img/logo.png')    
-                
-                    .span5
-                        form(action='/notify', method='POST').form-inline.span5
-                            h2
-                                | Passionate about helping others connect? We help you make more relevant connections, faster.
+        .row
+          .span3
+            img(src='img/logo.png')    
+                      
+          .span5
+            form(action='/notify', method='POST').form-inline.span5
+              h2
+                | Passionate about helping others connect? We help you make more relevant connections, faster.
+              h4
+                | Leave your email below if you want to be notified when we launch.
+              #email
+                input(type="text", name="email", placeholder='Your e-mail')     
+                input.btn.btn-primary(type="submit", value="Notify me")
 
-                            h4
-                                | Leave your email below if you want to be notified when we launch.
+  .row
+    .span2
+      p
 
-                            #email
-                                input(type="text", name="email", placeholder='Your e-mail')     
-                                input.btn.btn-primary(type="submit", value="Notify me")
-
+  .row
+    .span2
+      p
+    .span10
+      center
+        .fb-like(data-href="http://500ties.com", data-send="false", data-width="90", data-height="80", data-show-faces="false", data-layout="button_count")
+        a(href="https://twitter.com/share", class="twitter-share-button", data-via="500ties", data-related="500ties", data-hashtags="aklsw", data-size="normal") Tweet
+        script
+          !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+        .g-plusone(annotation='inline', data-href='http://500ties.com')
  
 block footer
 
