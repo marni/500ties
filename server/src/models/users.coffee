@@ -44,6 +44,13 @@ module.exports = (app) ->
                 consumerSecret: app.conf.auth.twit.consumerSecret
                 redirectPath: '/'
 
+        linkedin:
+            everyauth:
+                myHostname: 'http://500ties.com'
+                consumerKey: app.conf.auth.twit.consumerKey
+                consumerSecret: app.conf.auth.twit.consumerSecret
+                redirectPath: '/'
+
         facebook:
             everyauth:
                 myHostname: 'http://500ties.com'
