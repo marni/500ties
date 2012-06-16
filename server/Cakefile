@@ -48,11 +48,9 @@ task "clean", "Remove .js files", ->
     removeJsFiles dir for dir in [
         SRC_FOLDER,
         SRC_FOLDER + '/routes',
-        SRC_FOLDER + '/test',
         SRC_FOLDER + '/models',
         LIB_FOLDER,
         LIB_FOLDER + '/routes',
-        LIB_FOLDER + '/test',
         LIB_FOLDER + '/models' ]
 
 
