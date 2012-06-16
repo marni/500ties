@@ -30,6 +30,10 @@
             "clientId": "532407284950.apps.googleusercontent.com"
           , "clientSecret": "Bo7joRAAAKiH_CFRLiKEt5Zv"
         }
+        , "linkedin": {
+            "consumerKey": "73dm7omthg0a"
+          , "consumerSecret": "v8h0FBGdqrdiaQDO"
+        }
   }
   , "scripts": {
       "test": "mocha"
