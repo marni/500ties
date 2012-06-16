@@ -19,10 +19,13 @@ module.exports = (app) ->
     User = app.users.User
     ObjectId = app.mongoose.Schema.ObjectId
 
-    # Home Page
+    # Landing page
     app.get '/', (req, res) ->
         res.render 'lending'
         return
+
+    # Home Page
+    app.get '/beta', (req, res) ->
         if req.session.auth and req.session.auth.loggedIn
             usrId = req.user.id
             User.findOne {_id: usrId}, (err, doc) ->
