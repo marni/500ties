@@ -46,14 +46,14 @@ module.exports = (app) ->
 
         facebook:
             everyauth:
-                myHostname: 'http://127.0.0.1:3099'
+                myHostname: 'http://500ties.com'
                 appId: app.conf.auth.facebook.appId
                 appSecret: app.conf.auth.facebook.appSecret
                 redirectPath: '/'
             
         google:
             everyauth:
-                myHostname: 'http://127.0.0.1:3099'
+                myHostname: 'http://500ties.com'
                 appId: app.conf.auth.google.clientId
                 appSecret: app.conf.auth.google.clientSecret
                 redirectPath: '/'

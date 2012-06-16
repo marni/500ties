@@ -1,5 +1,5 @@
 {
-    "name": "diveclub.me"
+    "name": "500ties.com"
   , "version": "0.1.0"
   , "private": true
   , "dependencies": {
@@ -37,8 +37,7 @@
     }
   , "path": {
         "lib": { "folder": "." }
-      , "test": { "folder": "./test" }
-      , "src": { "folderaaaaaaaa": "./src" }
+      , "src": { "folder": "./src" }
     }
   , "devDependencies": {
       "mocha": "*"
