@@ -13,14 +13,14 @@ block content
             b Sign up 
             | | Free
           
-    - if (everyauth.loggedIn)
-        .row
-          .span5
-            center
-              h1 Hey, you just logged in
-              br
+      - if (everyauth.loggedIn)
+          .row
+            .span10
+              center
+                h3 Hey, you just logged in
+                br
 
-    - else
+      - else
         .row
           .span8
             center
