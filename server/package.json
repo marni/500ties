@@ -19,8 +19,8 @@
   }
   , "auth": {
         "twit": {
-            "consumerKey": "EUA0sqR18fnmZHEZdlfyQw"
-          , "consumerSecret": "0LiDPIHJzQRlbAiVD2rxNC6gD3XEX1rCHfCKygSvor0"
+            "consumerKey": "k17deKq8oCfJ2MmmTGJBoA"
+          , "consumerSecret": "7o7pIaufkHHbFn1ZeAoqDUFBZjKNQUtLkNmRNgMc"
         }
         , "facebook": {
             "appId": "318675698215230"
