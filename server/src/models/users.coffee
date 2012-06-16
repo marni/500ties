@@ -39,21 +39,21 @@ module.exports = (app) ->
 
         twitter:
             everyauth:
-                myHostname: 'http://127.0.0.1:3060'
+                myHostname: 'http://127.0.0.1:3099'
                 consumerKey: app.conf.auth.twit.consumerKey
                 consumerSecret: app.conf.auth.twit.consumerSecret
                 redirectPath: '/'
 
         facebook:
             everyauth:
-                myHostname: 'http://127.0.0.1:3060'
+                myHostname: 'http://127.0.0.1:3099'
                 appId: app.conf.auth.facebook.appId
                 appSecret: app.conf.auth.facebook.appSecret
                 redirectPath: '/'
             
         google:
             everyauth:
-                myHostname: 'http://127.0.0.1:3060'
+                myHostname: 'http://127.0.0.1:3099'
                 appId: app.conf.auth.google.clientId
                 appSecret: app.conf.auth.google.clientSecret
                 redirectPath: '/'
