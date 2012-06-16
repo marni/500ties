@@ -20,7 +20,6 @@ pack = JSON.parse fs.readFileSync('./package.json')
 TEST_CMD = pack.scripts.test
 
 LIB_FOLDER = pack.path.lib.folder
-TEST_FOLDER = pack.path.test.folder
 SRC_FOLDER = pack.path.src.folder
 
 node = null
