@@ -61,14 +61,8 @@ module.exports = (app) ->
                 if usr is null
                     console.log 'No User object for this user.'
                     usr = {}
-                Qualification.find {}, (err2, qua) ->
-                    list_of_qualifications = []
-                    for q in qua
-                        list_of_qualifications.push q.name
-                    res.render 'users/user_settings',
-                        userProfile: usr
-                        qualifications: list_of_qualifications
-                        selected_qualifications: usr['diver_qualifications']
+                res.render 'users/user_settings',
+                    userProfile: usr
         else
             res.render 'users/login'
 
