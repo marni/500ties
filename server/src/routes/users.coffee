@@ -21,6 +21,8 @@ module.exports = (app) ->
 
     # Home Page
     app.get '/', (req, res) ->
+        res.render 'lending'
+        return
         if req.session.auth and req.session.auth.loggedIn
             usrId = req.user.id
             User.findOne {_id: usrId}, (err, doc) ->
