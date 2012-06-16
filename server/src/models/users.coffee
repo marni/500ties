@@ -1,9 +1,9 @@
 ###
 #
-# DiveClub.me
-# (C) 2012 Ngarua Technologies.
+# 500ties.com
 #
-# Models, types definitions and DB management.
+# Models, types definitions for mongoose-auth and user management.
+# Only logins and authentication. See ties.coffee for People Connections
 #
 # Users and User management.
 #
