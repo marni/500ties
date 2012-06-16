@@ -35,6 +35,15 @@ module.exports = (app) ->
         else
             res.render 'home_page'
     
+    # user notification from landing page
+    app.post '/notify', (req, res) ->
+        email = req.body.email
+        fs = require 'fs'
+        stream = fs.createWriteStream 'ties_emals.txt', 'flags': 'a'
+        stream.once 'open', (fd) ->
+            stream.write email
+            stream.write '\n'
+        res.render 'lending_thanks'
     
     # user login 
     app.get '/user/login', (req, res) ->
