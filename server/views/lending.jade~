@@ -7,7 +7,7 @@ block content
         .span8.offset2
             .suscribe
                 
-         
+                .span4
                     
 
                 form(action='/notify', method='POST').form-inline
