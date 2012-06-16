@@ -1,0 +1,85 @@
+
+###
+#
+# Users
+#
+# Home page,
+# processing the ogin process, 
+# user registration, verification, 
+# users profile management
+#
+# 
+###
+
+
+
+
+module.exports = (app) ->
+
+    User = app.users.User
+    ObjectId = app.mongoose.Schema.ObjectId
+
+    # Home Page
+    app.get '/', (req, res) ->
+        if req.session.auth and req.session.auth.loggedIn
+            usrId = req.user.id
+            User.findOne {_id: usrId}, (err, doc) ->
+                if doc is null
+                    console.log 'No User Object found'
+                    return res.render 'home_page'
+                # We got the user, need to get all his clubs
+                # and show it on the front page
+                res.render 'home_page'
+        else
+            res.render 'home_page'
+    
+    
+    # user login 
+    app.get '/user/login', (req, res) ->
+        res.render 'users/login'
+    
+
+    # user profile
+    app.get '/user/profile', (req, res) ->
+        if req.session.auth and req.session.auth.loggedIn
+            usrId = req.user._id
+            User.findOne {_id: usrId}, (err, usr) ->
+                if usr is null
+                    console.log 'No User object for this user.'
+                    usr = {}
+                Qualification.find {}, (err2, qua) ->
+                    list_of_qualifications = []
+                    for q in qua
+                        list_of_qualifications.push q.name
+                    res.render 'users/user_settings',
+                        userProfile: usr
+                        qualifications: list_of_qualifications
+                        selected_qualifications: usr['diver_qualifications']
+        else
+            res.render 'users/login'
+
+    app.post '/user/profile/:usrId/update', (req, res) ->
+        User.findOne {_id: req.params.usrId}, (err, doc) ->
+            if doc
+                usr = doc
+            else
+                # handle problem with User
+                return res.render 'home_page'
+            usr.first_name = req.body.firstname
+            usr.last_name = req.body.lastname
+            usr.email = req.body.email
+            usr.diver_id = req.body.diver_id
+            usr.diver_qualifications = req.body.diver_qualifications
+            usr.save (err) ->
+                if (err)
+                    console.log err
+            # find the profile and deal with it
+            res.render 'users/user_settings', userProfile: usr
+    
+
+    # add new User
+    app.get '/user/new', (req, res) ->
+        res.render 'users/login'
+
+    
+

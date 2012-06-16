@@ -1,0 +1,49 @@
+{
+    "name": "diveclub.me"
+  , "version": "0.1.0"
+  , "private": true
+  , "dependencies": {
+      "express": ">= 2.5.5"
+    , "jade": ">= 0.20.0"
+    , "stylus": ">= 0.20.0"
+    , "everyauth": ">= 0.1.0"
+    , "mongoose": ">= 2.5.11"
+    , "mongoose-types": ">= 0.1.0"
+    , "mongoose-auth": ">= 0.0.11"
+    , "connect-mongo": ">= 0.0.0"
+    , "express-messages-bootstrap": ">= 0.0.0"
+    , "forms-bootstrap": ">= 0.0.0"
+    , "tobi": ">= 0.0.0"
+    , "soda": ">= 0.0.0"
+    , "soda-sync": ">= 0.0.0"
+  }
+  , "auth": {
+        "twit": {
+            "consumerKey": "ePAp2uO0sQthTzXqwL6g"
+          , "consumerSecret": "BKJdCqQh3sj6wemFUZXzc0UqN2CwHYQViuRAlyXjh3Y"
+        }
+        , "facebook": {
+            "appId": "333231110083020"
+          , "appSecret": "47f6070a2c42f6e06fc0b979d8ca0d44"
+        }
+        , "google": {
+            "clientId": "23502708252.apps.googleusercontent.com"
+          , "clientSecret": "YeJoaQbz93qyM3b5ivra18Me"
+        }
+  }
+  , "scripts": {
+      "test": "mocha"
+    , "start": "/usr/local/bin/node server.js"
+    }
+  , "path": {
+        "lib": { "folder": "." }
+      , "test": { "folder": "./test" }
+      , "src": { "folder": "./src" }
+    }
+  , "devDependencies": {
+      "mocha": "*"
+    , "should": "*"
+    }
+  , "engine": "node ~> 0.6.x"
+}
+

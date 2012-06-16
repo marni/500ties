@@ -1,0 +1,277 @@
+
+#
+# Main build script for DiveClub.me
+# 
+#
+
+fs            = require 'fs'
+fs.path	      = require 'path'
+{print}       = require 'util'
+{spawn, exec} = require 'child_process'
+
+# ANSI Terminal Colors
+bold = '' #'\033[0;1m'
+green = '' #'\033[0;32m'
+reset = '' #'\033[0m'
+red = '' #'\033[0;31m'
+
+pack = JSON.parse fs.readFileSync('./package.json')
+
+TEST_CMD = pack.scripts.test
+
+LIB_FOLDER = pack.path.lib.folder
+TEST_FOLDER = pack.path.test.folder
+SRC_FOLDER = pack.path.src.folder
+
+node = null
+
+
+task 'docs', 'Generate annotated source code with Docco', ->
+  fs.readdir '.', (err, contents) ->
+    files = (SRC_FOLDER+"/#{file}" for file in contents when /\.coffee$/.test file)
+    docco = spawn 'docco', files
+    docco.stdout.on 'data', (data) -> print data.toString()
+    docco.stderr.on 'data', (data) -> log data.toString(), red
+    docco.on 'exit', (status) -> callback?() if status is 0
+
+
+task 'build', ->
+  build -> log ":) build successful.", green
+ 
+task 'run', 'Run the dev server', ->
+    start()
+
+task 'test', 'Run mocha tests', ->
+    build -> mocha -> log ":) tests seem fine.", green
+
+task "clean", "Remove .js files", ->
+    removeJsFiles dir for dir in [
+        SRC_FOLDER,
+        SRC_FOLDER + '/routes',
+        SRC_FOLDER + '/test',
+        SRC_FOLDER + '/models',
+        LIB_FOLDER,
+        LIB_FOLDER + '/routes',
+        LIB_FOLDER + '/test',
+        LIB_FOLDER + '/models' ]
+
+
+
+
+
+# --------------------------------------
+# # Low-Level Support
+
+
+log = (message, color, explanation) ->
+  console.log color + message + reset + ' ' + (explanation or '')
+
+build = (watch, callback) ->
+  if typeof watch is 'function'
+    callback = watch
+    watch = false
+  options = ['-b', '-o', LIB_FOLDER, SRC_FOLDER]
+  options.unshift '-w' if watch
+  
+  coffee = spawn 'coffee', options
+  coffee.stdout.on 'data', (data) -> print data.toString()
+  coffee.stderr.on 'data', (data) -> log data.toString(), red
+  coffee.on 'exit', (status) -> callback?() if status is 0
+
+
+# run quiet (-q) supervisor 
+run = (callback) ->
+  options = ['-q', LIB_FOLDER+'/server.js']
+  spec = spawn 'supervisor', options
+  spec.stdout.on 'data', (data) -> print data.toString()
+  spec.stderr.on 'data', (data) -> log data.toString(), red
+  spec.on 'exit', (status) -> callback?() if status is 0
+  node = spec
+
+start = ->
+    build ->
+        node?.kill()
+        run()
+
+
+# launch a given command
+launch = (cmd, options=[], callback) ->
+  # version if which is available: cmd = which(cmd) if which
+  app = spawn cmd, options
+  app.stdout.pipe(process.stdout)
+  app.stderr.pipe(process.stderr)
+  app.on 'exit', (status) -> callback?() if status is 0
+
+
+# run mocha
+mocha = (options, callback) ->
+  if typeof options is 'function'
+    callback = options
+    options = ['--colors', '--reporter', 'spec']
+    #launch 'java', ['-jar', 'extras/selenium-server-standalone-2.21.0.jar']
+  launch TEST_CMD, options, callback
+
+
+# Brag to the user about something you just did
+boast = (verb, from, to) ->
+  padR = (string, length) ->
+    string = "#{string} " while string.length < length
+    string
+  
+  padL = (string, length) ->
+    string = " #{string}" while string.length < length
+    string
+  
+  msg = "#{padL verb, 10}  #{from}"
+  msg = "#{padR msg, 30} -> #{to}" if to
+  console.log msg
+
+
+# Is the verbose option set?
+isVerbose = ->
+  args = process.argv
+  args.indexOf("-v") isnt -1 or args.indexOf("--verbose") isnt -1
+
+
+# Quote a string so it can be used in a terminal
+q = (string) ->
+  if typeof string is "string"
+    string = string.replace /\n/, '\\n'
+    string = string.replace /\r/, '\\r'
+    return string if /^\s*".*"\s*$/.test string
+    "\"#{string}\""
+  else
+    q item for item in string
+
+
+# Report an fatal error
+fatal = (err, command, message) ->
+  cmdError = /command failed/i.test err.message
+  if cmdError
+    console.error "Error: Could not run command `#{command}`"
+    console.error message if message
+    unless isVerbose()
+      console.error "Run the cake task again with the -v/--verbose option, to see error details"
+  throw err if isVerbose() or not cmdError
+  process.exit 1
+
+
+# A simple file synchronizer (like rsync)
+# Only syncs file that don't exist or are out of date in the destination
+sync = (from, to, callback) ->
+  {dirname, relative, join, existsSync} = require "path"
+  {lstatSync, createReadStream, createWriteStream} = require "fs"
+  
+  files = glob from, /^[^.]/i
+  directories = {}
+  
+  for file in files
+    dir = dirname(file)
+    dir = join to, relative(from, dir)
+    directories[dir] or= true
+  
+  createDir dir for own dir of directories
+  
+  queue = (for file in files
+    dest = join to, relative(from, file)
+    file: file
+    dest: dest
+  )
+  
+  copy = (op, callback) ->
+    # Only copy if dest file is missing or older than source
+    if existsSync(op.dest)
+      willCopy = lstatSync(op.file).mtime.getTime() > lstatSync(op.dest).mtime.getTime()
+    else
+      willCopy = yes
+    
+    if willCopy
+      stream = createReadStream op.file
+      stream.pipe createWriteStream(op.dest, flags: "w")
+      stream.on "end", -> callback true
+    else
+      callback false
+  
+  copied = 0
+  next = (didCopy = false) ->
+    copied++ if didCopy
+    if queue.length is 0
+      callback? copied
+      return
+    copy queue.pop(), next
+  
+  next()
+
+
+# Cross-platform function for resolving a path
+resolve = (relativePath) ->
+  segments = relativePath.split /\+/
+  segments.unshift fs.path.resolve(__dirname) unless /^(\/|[a-z]:\\)/i.test relativePath
+  fs.path.join segments...
+
+
+# Recursively create directories as needed
+createDir = (path) ->
+  return if fs.path.existsSync path
+  segments = path.split /\/|[\\]/
+  path = ""
+  created = false
+  until segments.length is 0
+    path = fs.path.join path, segments.shift()
+    continue if fs.path.existsSync path
+    fs.mkdir path
+    created = true
+  boast "mkdir", path
+
+
+# Remove a directory (whether it's empty or not) in the CWD
+removeDir = (path) ->
+  if /^\./.test fs.path.relative(__dirname, path)
+    console.error "Error: Won't remove directories outside of the project"
+    process.exit 1
+  return unless fs.path.existsSync path
+  cleanDir path
+  fs.rmdirSync path
+
+
+# Create or empty the directory specified by `path`
+cleanDir = (path) ->
+  path = path
+  unless fs.path.existsSync(path)
+    createDir path
+    return
+  files = fs.readdirSync path
+  for file in files
+    file = fs.path.join path, file
+    if fs.lstatSync(file).isDirectory()
+      removeDir file
+    else
+      fs.unlinkSync file
+
+# removes all .js files from a given directory
+removeJsFiles = (dir_name) ->
+  fs.readdir dir_name, (err, contents) ->
+    files = (dir_name + "/#{file}" for file in contents when /\.js$/.test file)
+    for f in files
+      fs.unlinkSync f
+      boast "rm", f
+
+# Gather all regular files in the given directory and it's sub-directories
+walk = (directory) ->
+  directory = resolve directory
+  files = []
+  for file in fs.readdirSync directory
+    file = fs.path.join directory, file
+    stats = fs.lstatSync file
+    if stats.isDirectory()
+      files = files.concat walk(file)
+    else if stats.isFile()
+      files.push file
+  files
+
+
+# Same as `walk` but the the files filtered by a regular expression
+glob = (directory, pattern) ->
+  (file for file in walk(directory) when pattern.test fs.path.basename(file))
+
+

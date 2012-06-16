@@ -1,0 +1,28 @@
+extends base
+
+
+block content
+  .container
+    .hero-unit
+      h1 500ties  
+        small make the most out of your social network
+        br
+      
+      - if (!everyauth.loggedIn)
+          a(href='/user/login').btn.btn-large.pull-right.btn-success 
+            b Sign up 
+            | | Free
+          
+    - if (everyauth.loggedIn)
+        .row
+          .span5
+            center
+              h1 Hey, you just logged in
+              br
+
+    - else
+        .row
+          .span8
+            center
+              | 500ties makes your connections and referrals easy
+
