@@ -39,7 +39,7 @@ module.exports = (app) ->
 
         twitter:
             everyauth:
-                myHostname: 'http://127.0.0.1:3099'
+                myHostname: 'http://500ties.com'
                 consumerKey: app.conf.auth.twit.consumerKey
                 consumerSecret: app.conf.auth.twit.consumerSecret
                 redirectPath: '/'
