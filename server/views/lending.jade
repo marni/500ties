@@ -4,22 +4,24 @@ block content_header
 
 block content
     .row 
-        .span8.offset2
+        .span10.offset2
             .suscribe
                 
-         
-                    
+                .row
+                    .span3
+                        img(src='img/logo.png')    
+                
+                    .span5
+                        form(action='/notify', method='POST').form-inline.span5
+                            h2
+                                | Passionate about helping others connect? We help you make more relevant connections, faster.
 
-                form(action='/notify', method='POST').form-inline
-                    h2
-                        | Passionate about helping others connect? We help you make more relevant connections, faster.
+                            h4
+                                | We're building an ultimate tool for networkers, want to be notified when it's ready?
 
-                    h4
-                        | We're building an ultimate tool for networkers, wan't to be notified when it's ready?
-
-                    #email
-                        input(type="text", name="email", placeholder='Your e-mail')     
-                        input.btn.btn-primary(type="submit", value="Notify me")
+                            #email
+                                input(type="text", name="email", placeholder='Your e-mail')     
+                                input.btn.btn-primary(type="submit", value="Notify me")
 
  
 block footer
