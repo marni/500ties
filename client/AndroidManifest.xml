@@ -18,6 +18,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity
+            android:name=".InviteActivity"
+            android:label="Connect" >
+        </activity>
+        
+        <activity
+            android:name=".InvitedListActivity"
+            android:label="Connections" >
+        </activity>
     </application>
 
 </manifest>

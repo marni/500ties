@@ -3,6 +3,7 @@ package com.ties;
 import com.ties.utils.Factory;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -24,5 +25,8 @@ public class InviteActivity extends Activity{
 		String email = emailInput.getText().toString();
 		
 		factory.getInviteDAO().insert(email);
+		
+		Intent intent = new Intent(this, InvitedListActivity.class);
+		startActivity(intent);
 	}
 }

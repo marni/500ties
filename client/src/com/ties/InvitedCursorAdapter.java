@@ -9,7 +9,7 @@ import android.widget.SimpleCursorAdapter;
 public class InvitedCursorAdapter extends SimpleCursorAdapter {
 
 	public InvitedCursorAdapter(Context context, Cursor cursor) {
-		super(context, android.R.layout.simple_dropdown_item_1line, cursor,
+		super(context, android.R.layout.simple_list_item_1, cursor,
 				new String[] { Invite.EMAIL }, new int[] { android.R.id.text1 });
 	}
 
