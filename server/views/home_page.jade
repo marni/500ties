@@ -4,23 +4,28 @@ extends base
 block content
   .container
     .hero-unit
-      img(src='img/logoblack.png') 
-      h1
-       small make the most out of your social network
-      br
-      | 500ties makes your connections and referrals easy
-      
-      - if (!everyauth.loggedIn)
-          a(href='/user/login').btn.btn-large.pull-right.btn-success 
-            b Sign up 
-            | | Free
+      .row
+        .span6
+          img(src='img/logoblack.png') 
+        .span4
+          center
+            br
+            h2
+             make the most out of your social network
+             br
+             small 500ties makes your connections and referrals easy
+            br
+            br 
+            br        
+
+            - if (!everyauth.loggedIn)
+                a(href='/user/login').btn.btn-large.btn-success 
+                  b Sign up 
+                  | | Free
           
-      - if (everyauth.loggedIn)
-          .row
-            .span10
-              center
+            - if (everyauth.loggedIn)
                 h3 Hey, you just logged in
-                br
+          
 
       
 
