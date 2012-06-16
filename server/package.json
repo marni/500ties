@@ -19,16 +19,16 @@
   }
   , "auth": {
         "twit": {
-            "consumerKey": "ePAp2uO0sQthTzXqwL6g"
-          , "consumerSecret": "BKJdCqQh3sj6wemFUZXzc0UqN2CwHYQViuRAlyXjh3Y"
+            "consumerKey": "EUA0sqR18fnmZHEZdlfyQw"
+          , "consumerSecret": "0LiDPIHJzQRlbAiVD2rxNC6gD3XEX1rCHfCKygSvor0"
         }
         , "facebook": {
-            "appId": "333231110083020"
-          , "appSecret": "47f6070a2c42f6e06fc0b979d8ca0d44"
+            "appId": "318675698215230"
+          , "appSecret": "5763728fa023b40c0d6db98d288fd1b5"
         }
         , "google": {
-            "clientId": "23502708252.apps.googleusercontent.com"
-          , "clientSecret": "YeJoaQbz93qyM3b5ivra18Me"
+            "clientId": "532407284950.apps.googleusercontent.com"
+          , "clientSecret": "Bo7joRAAAKiH_CFRLiKEt5Zv"
         }
   }
   , "scripts": {
@@ -38,7 +38,7 @@
   , "path": {
         "lib": { "folder": "." }
       , "test": { "folder": "./test" }
-      , "src": { "folder": "./src" }
+      , "src": { "folderaaaaaaaa": "./src" }
     }
   , "devDependencies": {
       "mocha": "*"
