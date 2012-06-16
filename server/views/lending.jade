@@ -14,11 +14,14 @@ block content_header
 block content
   .row 
     .span11.offset2
-      .suscribe
+      .subscribe
         .span4
           img(src='img/logo.png')
           p
           br
+          script(type="in/Login") 
+            | Hello, <?js= firstName ?> <?js= lastName ?>.
+          
           h3 Do you know who Billy knows that you might need?
           br
           h3 Get the full picture.

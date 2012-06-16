@@ -2,56 +2,57 @@ extends ../base
 
 block content
   .container
-    .row
-      .span1
-        p
+    .hero-unit
+      .row
+        .span1
+          p
+        
+        .span9
+          h2 New user registration
 
-      .span9
-        h2 New user registration
+          - if ('undefined' !== typeof errors && errors.length)
+            ul#errors
+              - each error in errors
+                .alert.alert-error
+                  a(data-dismiss='alert').close x
+                  h3= error
 
-        - if ('undefined' !== typeof errors && errors.length)
-          ul#errors
-            - each error in errors
-              .alert.alert-error
-                a(data-dismiss='alert').close x
-                h3= error
+          form(action='/user/register', method='post').form-horizontal.well.register-new-user
+            #login
+              .control-group
+                label(for=everyauth.password.loginFormFieldName).control-label Unique username
+                .controls
+                  input(type='text', name=everyauth.password.loginFormFieldName, 
+                        value=userParams[everyauth.password.loginFormFieldName], placeholder='username').span4
+                  // p.help-block your user login
 
-        form(action='/user/register', method='post').form-horizontal.well.register-new-user
-          #login
-            .control-group
-              label(for=everyauth.password.loginFormFieldName).control-label Unique username
-              .controls
-                input(type='text', name=everyauth.password.loginFormFieldName, 
-                      value=userParams[everyauth.password.loginFormFieldName], placeholder='username').span4
-                // p.help-block your user login
+            #password
+              .control-group
+                label(for=everyauth.password.passwordFormFieldName).control-label Password
+                .controls
+                  input(type='password', name=everyauth.password.passwordFormFieldName,
+                        title='password', placeholder='password').span4
 
-          #password
-            .control-group
-              label(for=everyauth.password.passwordFormFieldName).control-label Password
-              .controls
-                input(type='password', name=everyauth.password.passwordFormFieldName,
-                      title='password', placeholder='password').span4
+            #first_name
+              .control-group
+                label(for='first_name').control-label First name
+                .controls
+                  input(type='text', name='first_name', placeholder='first_name').span4
 
-          #first_name
-            .control-group
-              label(for='first_name').control-label First name
-              .controls
-                input(type='text', name='first_name', placeholder='first_name').span4
+            #last_name
+              .control-group
+                label(for='last_name').control-label Last name
+                .controls
+                  input(type='text', name='last_name', placeholder='last_name').span4
 
-          #last_name
-            .control-group
-              label(for='last_name').control-label Last name
-              .controls
-                input(type='text', name='last_name', placeholder='last_name').span4
-
-          #email
-            .control-group
-              label(for='email').control-label Your email
-              .controls
-                input(type='text', name='email', placeholder='email').span4
-                  
-          #submit
-            center
-              input(type='submit', value='Register me').btn.btn-large.btn-primary
+            #email
+              .control-group
+                label(for='email').control-label Your email
+                .controls
+                  input(type='text', name='email', placeholder='email').span4
+                    
+            #submit
+              center
+                input(type='submit', value='Register me').btn.btn-large.btn-primary
 
 

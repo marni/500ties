@@ -2,39 +2,40 @@ extends ../base
 
 block content
   .container
-    .row
-      .span8
-        h2 User profile and settings
+    .hero-unit
+      .row
+        .span8
+          h2 User profile and settings
 
-        - if ('undefined' !== typeof errors && errors.length)
-          ul#errors
-            each error in errors
-              .alert.alert-error
-                a(data-dismiss='alert').close x
-                h3= error
+          - if ('undefined' !== typeof errors && errors.length)
+            ul#errors
+              each error in errors
+                .alert.alert-error
+                  a(data-dismiss='alert').close x
+                  h3= error
 
-        form(action='/user/profile/#{everyauth.user._id}/update', method='post').form-horizontal.well
-          #firstname
-            .control-group
-              label(for='firstname').control-label First name 
-              .controls
-                input(type='text', name='firstname', 
-                  value=userProfile['first_name'], placeholder='First name').span3
-          #lastname
-            .control-group
-              label(for='lastname').control-label Last name
-              .controls
-                input(type='text', name='lastname', value=userProfile['last_name'],
-                      title='Last name', placeholder='Last name').span3
-                        
-          #email
-            .control-group
-              label(for='email').control-label Your email
-              .controls
-                input(type='text', name='email', value=userProfile['email'], placeholder='email').span3
-                  
-          #submit
-            center
-              input(type='submit', value='Save profile').btn.btn-large.btn-success
+          form(action='/user/profile/#{everyauth.user._id}/update', method='post').form-horizontal.well
+            #firstname
+              .control-group
+                label(for='firstname').control-label First name 
+                .controls
+                  input(type='text', name='firstname', 
+                    value=userProfile['first_name'], placeholder='First name').span3
+            #lastname
+              .control-group
+                label(for='lastname').control-label Last name
+                .controls
+                  input(type='text', name='lastname', value=userProfile['last_name'],
+                        title='Last name', placeholder='Last name').span3
+                          
+            #email
+              .control-group
+                label(for='email').control-label Your email
+                .controls
+                  input(type='text', name='email', value=userProfile['email'], placeholder='email').span3
+                    
+            #submit
+              center
+                input(type='submit', value='Save profile').btn.btn-large.btn-success
 
 

@@ -24,7 +24,7 @@ module.exports = (app) ->
             extraParams:
                 email: String
                 first_name: String
-                last_last: String
+                last_name: String
                 diver_id: String
                 diver_qualifications: String
             everyauth:

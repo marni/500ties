@@ -11,8 +11,11 @@ html
     script(src='/js/google_analytics.js')
     script(src='/js/socials.js')
     script(src='https://apis.google.com/js/plusone.js')
-
-    block scripts
+    script(src="http://platform.linkedin.com/in.js")
+      api_key:73dm7omthg0a
+      authorize: true
+    
+  block scripts
 
   body
     script
@@ -30,7 +33,7 @@ html
               ul.nav.pull-right
                 - if (everyauth.loggedIn)
                   li.dropdown
-                    a(data-toggle='dropdown').dropdown-toggle #{user.first_name}
+                    a(data-toggle='dropdown').dropdown-toggle #{user.first_name} #{user.last_name}
                       b.caret
                     ul.dropdown-menu
                       li 
