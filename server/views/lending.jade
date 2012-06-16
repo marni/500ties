@@ -1,8 +1,23 @@
 extends base
 
-block prepend content_header
-  img#background_pic(src='img/tech_cocktail.png')
+block content_header
 
 block content
-        
+    .row 
+        .span5.offset3
+            .suscribe
+                
+                form.form-inline
+                    h2
+                        | Passionate about helping others connect? We help you make more relevant connections, faster.
+
+                    h4
+                        | We're building an ultimate tool for networkers, wan't to be notified when it's ready?
+
+                    #email
+                        input(type="text", name="email", placeholder='Your e-mail')     
+                        input.btn.btn-primary(type="submit", value="Notify me")
+
+ 
+block footer
 
