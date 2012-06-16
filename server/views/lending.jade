@@ -13,19 +13,31 @@ block content_header
 
 block content
   .row 
-    .span10.offset2
+    .span11.offset2
       .suscribe
-                
+        .span4
+          img(src='img/logo.png')
+          p
+          br
+          h3 Do you know who Billy knows that you might need?
+          br
+          h3 Get full picture.
+          br
+          h3 Take your friends networking. 
+
+        .span5
+          img(src='img/cloud_people.png', width='450')
+          br
+          br
+          br
+          br
+
         .row
-          .span3
-            img(src='img/logo.png')    
-                      
-          .span5
-            form(action='/notify', method='POST').form-inline.span5
-              h2
-                | Passionate about helping others connect? We help you make more relevant connections, faster.
-              h4
-                | Leave your email below if you want to be notified when we launch.
+          .span4
+            p
+          .span6
+            h4 Leave your email below if you want to be notified when we launch.
+            form(action='/notify', method='POST').form-inline
               #email
                 input(type="text", name="email", placeholder='Your e-mail')     
                 input.btn.btn-primary(type="submit", value="Notify me")
