@@ -16,6 +16,8 @@
     , "tobi": ">= 0.0.0"
     , "soda": ">= 0.0.0"
     , "soda-sync": ">= 0.0.0"
+    , "node-uuid": ">= 0.0.0"
+    , "nodemailer": ">= 0.0.0"
   }
   , "auth": {
         "twit": {
