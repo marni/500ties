@@ -111,24 +111,23 @@ module.exports = (app) ->
                 if (err)
                     console.log err
 
-            var nodemailer = 'nodemailer'
+            nodemailer = 'nodemailer'
 
-            nodemailer.send({
-               host : 'smtp.gmail.com',              // smtp server hostname
-               port : '25',                     // smtp server port
-               domain : '500ties.com',            // domain used by client to identify itself to server
-               to : email,
-               from : 'info@500ties.com',
-               subject : 'Invitation',
-               body: 'Hello! You got the invitation from.' + req.user.first_name,
-               authentication : 'login',        // auth login is supported; anything else is no auth
-               username : 'info@500ties.com',       // Base64 encoded username
-               password : '500tiesaklsw'        // Base64 encoded password
-               },
-               function(err, result){
-                 if(err){ console.log(err); 
-               }
-            }); 
+            nodemailer.send {
+               host : 'smtp.gmail.com'            
+               port : '25'                    
+               domain : '500ties.com'           
+               to : email
+               from : 'info@500ties.com'
+               subject : 'Invitation'
+               body: 'Hello! You got the invitation from.' + req.user.first_name
+               authentication : 'login'        
+               username : 'info@500ties.com'       
+               password : '500tiesaklsw'        
+               }, (err, result) -> 
+                 if(err)
+                    console.log(err) 
+               
 
     
     # user profile
