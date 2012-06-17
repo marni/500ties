@@ -36,7 +36,12 @@ module.exports = (app) ->
                 # and show it on the front page
                 res.render 'home_page'
         else
-            res.render 'home_page'
+            exec = require('child_process').exec
+            child = exec 'wc -l ties_emals.txt', (error, stdout, stderr) ->
+                        num = stdout.split('/')
+                        num = parseInt(num[0])
+                        res.render 'home_page',
+                            'subscriptions': num
     
     # user notification from landing page
     app.post '/notify', (req, res) ->

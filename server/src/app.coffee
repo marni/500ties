@@ -36,6 +36,7 @@ app.mongooseAuth = mongooseAuth
 
 # Authentication and User management
 app.users = require('./models/users')(app)
+app.ties = require('./models/ties')(mongoose)
 
 # Export the application
 module.exports = app

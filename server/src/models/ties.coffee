@@ -37,7 +37,7 @@ module.exports = (mongoose) ->
     # export what this module provides
     return {
         Person: Person
-        Introduction: Introduction
+        #Introduction: Introduction
     }
 
 
