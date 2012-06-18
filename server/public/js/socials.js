@@ -1,5 +1,3 @@
-<script type="text/javascript">
-
   (function() {
       // Google +1 button
       // place this 
@@ -11,4 +9,3 @@
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
   })();
 
-</script>
